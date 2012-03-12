@@ -48,7 +48,9 @@ class NewsTwitter extends Frontend
 			$strUrl = $this->generateNewsUrl($objNews);
 		}
 			
-		if ($this->twitter($objNews->twitterAuth, (strlen($objNews->twitterMessage) ? $objNews->twitterMessage : (strlen($objNews->teaser) ? $objNews->teaser : strip_tags($objNews->text))), $strUrl, $objNews->twitterParams))
+        $msg = sprintf("%d on %s", $objNews->id, $this->Environment->host);
+		
+		if ($this->twitter($objNews->twitterAuth, (strlen($objNews->twitterMessage) ? $objNews->twitterMessage : (strlen($objNews->teaser) ? $objNews->teaser : strip_tags($objNews->text))), $strUrl, $objNews->twitterParams, $msg))
 		{
 			$this->Database->prepare("UPDATE tl_news SET twitterStatus='sent' WHERE id=?")->execute($objNews->id);
 		}
@@ -79,7 +81,9 @@ class NewsTwitter extends Frontend
 				$strUrl = $this->generateNewsUrl($objNews);
 			}
 		
-			if ($this->twitter($objNews->twitterAuth, (strlen($objNews->twitterMessage) ? $objNews->twitterMessage : (strlen($objNews->teaser) ? $objNews->teaser : strip_tags($objNews->text))), $strUrl, $objNews->twitterParams))
+            $msg = sprintf("%d on %s", $objNews->id, $host);
+
+			if ($this->twitter($objNews->twitterAuth, (strlen($objNews->twitterMessage) ? $objNews->twitterMessage : (strlen($objNews->teaser) ? $objNews->teaser : strip_tags($objNews->text))), $strUrl, $objNews->twitterParams, $msg))
 			{
 				$this->Database->prepare("UPDATE tl_news SET twitterStatus='sent' WHERE id=?")->execute($objNews->id);
 			}
@@ -90,7 +94,7 @@ class NewsTwitter extends Frontend
 	/**
 	 * Send a message to twitter
 	 */
-	private function twitter($varAuth, $strStatus, $strUrl='', $strUrlParams='')
+	private function twitter($varAuth, $strStatus, $strUrl='', $strUrlParams='', $msg)
 	{
 		$access_token = deserialize($varAuth, true);
 		
@@ -131,6 +135,7 @@ class NewsTwitter extends Frontend
 			
 			if ($connection->http_code == 200)
 			{
+                $this->log('Twitter posted ' . $msg, 'NewsTwitter twitter()', TL_GENERAL);
 				return true;
 			}
 		}
