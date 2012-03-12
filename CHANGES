@@ -1,3 +1,5 @@
 2012-03-12  Takahiro Kambe  <tacahi>
 
+	* Remove its own creating short URL function,  shortUrl().
+
 	* Creating github repository and importing newstwitter 1.2.0.
