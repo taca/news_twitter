@@ -125,6 +125,8 @@ class NewsTwitter extends Frontend
 				{
 				    $strUrl .= (strpos($strUrl, '?') === false ? '?' : '&') . $strUrlParams;
 				}
+			
+				$strUrl = $this->shortUrl($strUrl);
 			}
 			
 			$connection->post('http://twitter.com/statuses/update.json?status=' . urlencode($strStatus . ' ' . $strUrl));
@@ -137,6 +139,21 @@ class NewsTwitter extends Frontend
 		
 		$this->log('Error posting to Twitter', 'NewsTwitter twitter()', TL_ERROR);
 		return false;
+	}
+	
+	
+	/**
+	 * Short url using is.gd (http://is.gd/api_info.php)
+	 */
+	private function shortUrl($strUrl)
+	{
+		$objRequest = new Request();
+		$objRequest->send('http://is.gd/api.php?longurl='.$strUrl);
+		
+		if ($objRequest->hasError())
+			return $strUrl;
+		
+		return $objRequest->response;
 	}
 	
 	
