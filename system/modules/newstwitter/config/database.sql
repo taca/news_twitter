@@ -29,5 +29,7 @@ CREATE TABLE `tl_news_archive` (
   `twitter` char(1) NOT NULL default '',
   `twitterAuth` varchar(255) NOT NULL default '',
   `twitterParams` varchar(255) NOT NULL default '',
+  `twitter_key` varchar(255) NOT NULL default '',
+  `twitter_secret` varchar(255) NOT NULL default '',
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 

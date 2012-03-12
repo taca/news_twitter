@@ -27,5 +27,9 @@ $GLOBALS['TL_LANG']['tl_news_archive']['twitter_auth_success'] = "Twitterに認�
 $GLOBALS['TL_LANG']['tl_news_archive']['twitter_auth_denied'] = "Twitterに認証を拒否されました。";
 $GLOBALS['TL_LANG']['tl_news_archive']['twitter_auth_token'] = "Twitterとの通信中にエラーが起きました。後で再度試してください。";
 $GLOBALS['TL_LANG']['tl_news_archive']['twitter_auth_insecure'] = "ウェブサイトをTwitterのアプリケーションとして登録していません! 登録は必須ではありませんが、Twitter認証システムの欠陥の理由から登録を強く推奨します。<a href=\"contao/help.php?table=tl_settings&field=twitter_secret\" onclick=\"Backend.openWindow(this, 600, 500); return false;\">さらに詳しい情報はこちらをクリックしてください。</a>";
+$GLOBALS['TL_LANG']['tl_news_archive']['twitter_key']['0'] = "コンシューマーキー";
+$GLOBALS['TL_LANG']['tl_news_archive']['twitter_key']['1'] = "<a href=\"contao/help.php?table=tl_news_archive&field=twitter_key\" onclick=\"Backend.openWindow(this, 600, 500); return false;\">あなたのアプリケーションの「コンシューマーキー」を入力してください。</a>";
+$GLOBALS['TL_LANG']['tl_news_archive']['twitter_secret']['0'] = "コンシューマーシークレット";
+$GLOBALS['TL_LANG']['tl_news_archive']['twitter_secret']['1'] = "<a href=\"contao/help.php?table=tl_news_archive&field=twitter_secret\" onclick=\"Backend.openWindow(this, 600, 500); return false;\">あなたのアプリケーションの「コンシューマーシークレット」を入力してください。</a>";
 
 ?>

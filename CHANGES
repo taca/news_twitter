@@ -1,5 +1,10 @@
 2012-03-12  Takahiro Kambe  <tacahi>
 
+	* Post to Twitter if the news archive's redirect page's domain
+	  matches to current domain of Environment class.
+
+	* Move Twitter's authenticated key and secret to each news archive.
+
 	* Remove white spaces of each line.
 
 	* Log succeed posting to Twitter.

@@ -22,5 +22,7 @@ $GLOBALS['TL_LANG']['tl_news_archive']['twitter_legend'] = "Twitter";
 $GLOBALS['TL_LANG']['tl_news_archive']['twitter_auth_error'] = "Vous n'êtes actuellement pas authentifié.";
 $GLOBALS['TL_LANG']['tl_news_archive']['twitter_auth_success'] = "Autentification sur Twitter réussie.";
 $GLOBALS['TL_LANG']['tl_news_archive']['twitter_auth_denied'] = "Autentification sur Twitter interdite.";
+$GLOBALS['TL_LANG']['tl_news_archive']['twitter_key']['0'] = "Consumer key";
+$GLOBALS['TL_LANG']['tl_news_archive']['twitter_secret']['0'] = "Consumer secret";
 
 ?>

@@ -37,7 +37,7 @@ class NewsTwitter extends Frontend
 	{
 		$this->import('Database');
 
-		$objNews = $this->Database->prepare("SELECT tl_news.*, tl_news_archive.twitterAuth, tl_news_archive.twitterParams, tl_news_archive.jumpTo AS parentJumpTo FROM tl_news LEFT OUTER JOIN tl_news_archive ON tl_news.pid=tl_news_archive.id WHERE tl_news_archive.twitter='1' AND tl_news.twitter='1' AND twitterStatus='now' AND published='1' AND tl_news.id=?")->limit(1)->execute($dc->id);
+		$objNews = $this->Database->prepare("SELECT tl_news.*, tl_news_archive.twitterAuth, tl_news_archive.twitterParams, tl_news_archive.twitter_key, tl_news_archive.twitter_secret, tl_news_archive.jumpTo AS parentJumpTo FROM tl_news LEFT OUTER JOIN tl_news_archive ON tl_news.pid=tl_news_archive.id WHERE tl_news_archive.twitter='1' AND tl_news.twitter='1' AND twitterStatus='now' AND published='1' AND tl_news.id=?")->limit(1)->execute($dc->id);
 
 		if (!$objNews->numRows)
 			return;
@@ -50,7 +50,7 @@ class NewsTwitter extends Frontend
 
         $msg = sprintf("%d on %s", $objNews->id, $this->Environment->host);
 
-		if ($this->twitter($objNews->twitterAuth, (strlen($objNews->twitterMessage) ? $objNews->twitterMessage : (strlen($objNews->teaser) ? $objNews->teaser : strip_tags($objNews->text))), $strUrl, $objNews->twitterParams, $msg))
+		if ($this->twitter($objNews->twitter_key, $objNews->twitter_secret, $objNews->twitterAuth, (strlen($objNews->twitterMessage) ? $objNews->twitterMessage : (strlen($objNews->teaser) ? $objNews->teaser : strip_tags($objNews->text))), $strUrl, $objNews->twitterParams, $msg))
 		{
 			$this->Database->prepare("UPDATE tl_news SET twitterStatus='sent' WHERE id=?")->execute($objNews->id);
 		}
@@ -64,13 +64,21 @@ class NewsTwitter extends Frontend
 	{
 		$this->import('Database');
 
-		$objNews = $this->Database->prepare("SELECT tl_news.*, tl_news_archive.twitterAuth, tl_news_archive.twitterParams, tl_news_archive.jumpTo AS parentJumpTo FROM tl_news LEFT OUTER JOIN tl_news_archive ON tl_news.pid=tl_news_archive.id WHERE tl_news_archive.twitter='1' AND tl_news.twitter='1' AND twitterStatus='cron' AND published='1'")->limit(1)->execute($dc->id);
+		$objNews = $this->Database->prepare("SELECT tl_news.*, tl_news_archive.twitterAuth, tl_news_archive.twitterParams, tl_news_archive.twitter_key, tl_news_archive.twitter_secret, tl_news_archive.jumpTo AS parentJumpTo FROM tl_news LEFT OUTER JOIN tl_news_archive ON tl_news.pid=tl_news_archive.id WHERE tl_news_archive.twitter='1' AND tl_news.twitter='1' AND twitterStatus='cron' AND published='1'")->limit(1)->execute($dc->id);
 
 		if (!$objNews->numRows)
 			return;
 
 		while( $objNews->next() )
 		{
+            if (!isset($redirectPage)) {
+                $redirectPage = $this->getPageDetails($objNews->parentJumpTo);
+                $host = $this->Environment->host;
+                if (strcasecmp($host, $redirectPage->domain) != 0) {
+                    break;
+                }
+            }
+
 			// Check if news is withing start & stop date
 			if (($objNews->start > 0 && $objNews->start > time()) || ($objNews->stop > 0 && $objNews->stop < time()))
 				continue;
@@ -83,7 +91,7 @@ class NewsTwitter extends Frontend
 
             $msg = sprintf("%d on %s", $objNews->id, $host);
 
-			if ($this->twitter($objNews->twitterAuth, (strlen($objNews->twitterMessage) ? $objNews->twitterMessage : (strlen($objNews->teaser) ? $objNews->teaser : strip_tags($objNews->text))), $strUrl, $objNews->twitterParams, $msg))
+			if ($this->twitter($objNews->twitter_key, $objNews->twitter_secret, $objNews->twitterAuth, (strlen($objNews->twitterMessage) ? $objNews->twitterMessage : (strlen($objNews->teaser) ? $objNews->teaser : strip_tags($objNews->text))), $strUrl, $objNews->twitterParams, $msg))
 			{
 				$this->Database->prepare("UPDATE tl_news SET twitterStatus='sent' WHERE id=?")->execute($objNews->id);
 			}
@@ -94,12 +102,12 @@ class NewsTwitter extends Frontend
 	/**
 	 * Send a message to twitter
 	 */
-	private function twitter($varAuth, $strStatus, $strUrl='', $strUrlParams='', $msg)
+	private function twitter($twitter_key, $twitter_secret, $varAuth, $strStatus, $strUrl='', $strUrlParams='', $msg = '')
 	{
 		$access_token = deserialize($varAuth, true);
 
 		// Create a TwitterOauth object with consumer/user tokens.
-		$connection = new TwitterOAuth($GLOBALS['TL_CONFIG']['twitter_key'], $GLOBALS['TL_CONFIG']['twitter_secret'], $access_token['oauth_token'], $access_token['oauth_token_secret']);
+		$connection = new TwitterOAuth($twitter_key, $twitter_secret, $access_token['oauth_token'], $access_token['oauth_token_secret']);
 		$connection->get('account/verify_credentials');
 
 		if ($connection->http_code == 200)

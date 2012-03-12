@@ -51,4 +51,6 @@ $GLOBALS['TL_LANG']['tl_news_archive']['twitter_auth_success']		= 'Twitter authe
 $GLOBALS['TL_LANG']['tl_news_archive']['twitter_auth_denied']		= 'Twitter authentication denied.';
 $GLOBALS['TL_LANG']['tl_news_archive']['twitter_auth_token']		= 'Error while communicating with Twitter. Please try again later.';
 $GLOBALS['TL_LANG']['tl_news_archive']['twitter_auth_insecure']		= 'You have not registered your website as a Twitter application! It is not required to do so, but highly recommended due to flaws in the Twitter authentication system. <a href="contao/help.php?table=tl_settings&field=twitter_secret" onclick="Backend.openWindow(this, 600, 500); return false;">Click here for more information.</a>';
+$GLOBALS['TL_LANG']['tl_news_archive']['twitter_key']		= array('Consumer key', '<a href="contao/help.php?table=tl_news_archive&field=twitter_key" onclick="Backend.openWindow(this, 600, 500); return false;">Please enter your application\' "Consumer key".</a>');
+$GLOBALS['TL_LANG']['tl_news_archive']['twitter_secret']	= array('Consumer secret', '<a href="contao/help.php?table=tl_news_archive&field=twitter_secret" onclick="Backend.openWindow(this, 600, 500); return false;">Please enter your application\' "Consumer secret".</a>');
 

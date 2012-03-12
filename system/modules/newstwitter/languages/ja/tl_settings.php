@@ -15,10 +15,10 @@
  * permanent text corrections which are update-safe.
  */
 
-$GLOBALS['TL_LANG']['tl_settings']['twitter_key']['0'] = "コンシューマー・キー";
-$GLOBALS['TL_LANG']['tl_settings']['twitter_key']['1'] = "<a href=\"contao/help.php?table=tl_settings&field=twitter_key\" onclick=\"Backend.openWindow(this, 600, 500); return false;\">あなたのアプリケーションの「コンシューマー・キー」を入力してください。</a>";
-$GLOBALS['TL_LANG']['tl_settings']['twitter_secret']['0'] = "コンシューマー・シークレット";
-$GLOBALS['TL_LANG']['tl_settings']['twitter_secret']['1'] = "<a href=\"contao/help.php?table=tl_settings&field=twitter_secret\" onclick=\"Backend.openWindow(this, 600, 500); return false;\">あなたのアプリケーションの「コンシューマー・シークレット」を入力してください。</a>";
+$GLOBALS['TL_LANG']['tl_settings']['twitter_key']['0'] = "コンシューマーキー";
+$GLOBALS['TL_LANG']['tl_settings']['twitter_key']['1'] = "<a href=\"contao/help.php?table=tl_settings&field=twitter_key\" onclick=\"Backend.openWindow(this, 600, 500); return false;\">あなたのアプリケーションの「コンシューマーキー」を入力してください。</a>";
+$GLOBALS['TL_LANG']['tl_settings']['twitter_secret']['0'] = "コンシューマーシークレット";
+$GLOBALS['TL_LANG']['tl_settings']['twitter_secret']['1'] = "<a href=\"contao/help.php?table=tl_settings&field=twitter_secret\" onclick=\"Backend.openWindow(this, 600, 500); return false;\">あなたのアプリケーションの「コンシューマーシークレット」を入力してください。</a>";
 $GLOBALS['TL_LANG']['tl_settings']['twitter_legend'] = "Twitter認証";
 
 ?>

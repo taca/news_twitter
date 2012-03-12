@@ -33,7 +33,7 @@
  */
 $GLOBALS['TL_DCA']['tl_news_archive']['palettes']['__selector__'][] = 'twitter';
 $GLOBALS['TL_DCA']['tl_news_archive']['palettes']['default'] .= ';{twitter_legend},twitter';
-$GLOBALS['TL_DCA']['tl_news_archive']['subpalettes']['twitter'] = 'twitterAuth,twitterParams';
+$GLOBALS['TL_DCA']['tl_news_archive']['subpalettes']['twitter'] = 'twitterAuth,twitterParams,twitter_key,twitter_secret';
 
 
 /**
@@ -62,6 +62,21 @@ $GLOBALS['TL_DCA']['tl_news_archive']['fields']['twitterParams'] = array
 	'eval'			=> array('maxlength'=>255, 'rgxp'=>'url', 'tl_class'=>'clr'),
 );
 
+$GLOBALS['TL_DCA']['tl_news_archive']['fields']['twitter_key'] = array
+(
+	'label'				=> &$GLOBALS['TL_LANG']['tl_news_archive']['twitter_key'],
+	'inputType'			=> 'text',
+	'eval'				=> array('tl_class'=>'w50', 'helpwizard'=>true),
+	'explanation'		=> 'twitter_auth'
+);
+
+$GLOBALS['TL_DCA']['tl_news_archive']['fields']['twitter_secret'] = array
+(
+	'label'				=> &$GLOBALS['TL_LANG']['tl_news_archive']['twitter_secret'],
+	'inputType'			=> 'text',
+	'eval'				=> array('tl_class'=>'w50', 'helpwizard'=>true),
+	'explanation'		=> 'twitter_auth'
+);
 
 class tl_news_archive_newstwitter extends Backend
 {
@@ -71,11 +86,21 @@ class tl_news_archive_newstwitter extends Backend
 	 */
 	public function authenticate($dc, $label)
 	{
-		if ($GLOBALS['TL_CONFIG']['twitter_key'] == '' || $GLOBALS['TL_CONFIG']['twitter_secret'] == '')
+        // Try to use saved value in NewsArchive
+        $twitter_key = $dc->activeRecord->{'twitter_key'};
+        $twitter_secret = $dc->activeRecord->{'twitter_secret'};
+
+        // If any value in NewsArchive, try global value as default.
+        if ($twitter_key == '' || $twitter_secret == '') {
+            $twitter_key = $GLOBALS['TL_CONFIG']['twitter_key'];
+            $twitter_secret = $GLOBALS['TL_CONFIG']['twitter_secret'];
+        }
+
+		if ($twitter_key == '' || $twitter_secret == '')
 		{
 			// Fall back to Twitter OAuth configuration for application "Contao Open Source CMS".
-			$GLOBALS['TL_CONFIG']['twitter_key'] = 'WehyUu32jxf2mJmN9ijeDw';
-			$GLOBALS['TL_CONFIG']['twitter_secret'] = 'hwnYKGAlySg5eXJGtJU9RoOHQLyArRa2KN4zO3oBQ';
+            $twitter_key = 'WehyUu32jxf2mJmN9ijeDw';
+            $twitter_secret = 'hwnYKGAlySg5eXJGtJU9RoOHQLyArRa2KN4zO3oBQ';
 
 			$insecure = '<p class="tl_gerror">'.$GLOBALS['TL_LANG']['tl_news_archive']['twitter_auth_insecure'].'</p>';
 		}
@@ -88,7 +113,7 @@ class tl_news_archive_newstwitter extends Backend
 		{
 			if (!$_SESSION['oauth_token'] || !$_SESSION['oauth_token_secret'])
 			{
-				$connection = new TwitterOAuth($GLOBALS['TL_CONFIG']['twitter_key'], $GLOBALS['TL_CONFIG']['twitter_secret']);
+				$connection = new TwitterOAuth($twitter_key, $twitter_secret);
 
 				// Get temporary credentials.
 				$request_token = $connection->getRequestToken($this->Environment->base . $this->Environment->request);
@@ -113,7 +138,7 @@ class tl_news_archive_newstwitter extends Backend
 			elseif ($this->Input->get('oauth_token') != '' && $this->Input->get('oauth_token') == $_SESSION['oauth_token'])
 			{
 				// Create TwitteroAuth object with app key/secret and token key/secret from default phase
-				$connection = new TwitterOAuth($GLOBALS['TL_CONFIG']['twitter_key'], $GLOBALS['TL_CONFIG']['twitter_secret'], $_SESSION['oauth_token'], $_SESSION['oauth_token_secret']);
+				$connection = new TwitterOAuth($twitter_key, $twitter_secret, $_SESSION['oauth_token'], $_SESSION['oauth_token_secret']);
 
 				// Request access tokens from twitter
 				$access_token = $connection->getAccessToken($_REQUEST['oauth_verifier']);
@@ -144,7 +169,7 @@ class tl_news_archive_newstwitter extends Backend
 		$access_token = deserialize($dc->activeRecord->{$dc->field});
 
 		// Create a TwitterOauth object with consumer/user tokens.
-		$connection = new TwitterOAuth($GLOBALS['TL_CONFIG']['twitter_key'], $GLOBALS['TL_CONFIG']['twitter_secret'], $access_token['oauth_token'], $access_token['oauth_token_secret']);
+		$connection = new TwitterOAuth($twitter_key, $twitter_secret, $access_token['oauth_token'], $access_token['oauth_token_secret']);
 
 		// If method is set change API call made. Test is called by default.
 		$connection->get('account/verify_credentials');

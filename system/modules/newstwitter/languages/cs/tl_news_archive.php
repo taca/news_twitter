@@ -27,5 +27,9 @@ $GLOBALS['TL_LANG']['tl_news_archive']['twitter_auth_success'] = "Autorizace pro
 $GLOBALS['TL_LANG']['tl_news_archive']['twitter_auth_denied'] = "Autorizace selhala.";
 $GLOBALS['TL_LANG']['tl_news_archive']['twitter_auth_token'] = "Nastala chyba při komunikaci s Twitterem. Prosím zkuste to ještě jednou.";
 $GLOBALS['TL_LANG']['tl_news_archive']['twitter_auth_insecure'] = "Neregistrovali jste Vaši webovou stránku! Je doporučeno provést nejprve tento krok <a href=\"contao/help.php?table=tl_settings&field=twitter_secret\" onclick=\"Backend.openWindow(this, 600, 500); return false;\">Click here for more information.</a>";
+$GLOBALS['TL_LANG']['tl_news_archive']['twitter_key']['0'] = "Consumer key";
+$GLOBALS['TL_LANG']['tl_news_archive']['twitter_key']['1'] = "<a href=\"contao/help.php?table=tl_news_archive&field=twitter_key\" onclick=\"Backend.openWindow(this, 600, 500); return false;\">Zadejte prosím tzv. \"Consumer key\".</a>";
+$GLOBALS['TL_LANG']['tl_news_archive']['twitter_secret']['0'] = "Consumer secret";
+$GLOBALS['TL_LANG']['tl_news_archive']['twitter_secret']['1'] = "<a href=\"contao/help.php?table=tl_news_archive&field=twitter_secret\" onclick=\"Backend.openWindow(this, 600, 500); return false;\">Zadejte prosím \"Consumer secret\".</a>";
 
 ?>
