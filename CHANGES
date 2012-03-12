@@ -1,5 +1,7 @@
 2012-03-12  Takahiro Kambe  <tacahi>
 
+	* Guard OAuth.php and TwitterOAuth.php from direct access.
+
 	* Post to Twitter if the news archive's redirect page's domain
 	  matches to current domain of Environment class.
 

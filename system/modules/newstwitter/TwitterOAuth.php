@@ -1,4 +1,4 @@
-<?php
+<?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /*
  * Abraham Williams (abraham@abrah.am) http://abrah.am
