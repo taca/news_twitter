@@ -7,9 +7,9 @@
 -- *                                                        *
 -- **********************************************************
 
--- 
+--
 -- Table `tl_news`
--- 
+--
 
 CREATE TABLE `tl_news` (
   `twitter` char(1) NOT NULL default '',
@@ -21,9 +21,9 @@ CREATE TABLE `tl_news` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table `tl_news_archive`
--- 
+--
 
 CREATE TABLE `tl_news_archive` (
   `twitter` char(1) NOT NULL default '',

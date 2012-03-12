@@ -1,5 +1,7 @@
 2012-03-12  Takahiro Kambe  <tacahi>
 
+	* Remove white spaces of each line.
+
 	* Log succeed posting to Twitter.
 
 	* Remove its own creating short URL function,  shortUrl().
