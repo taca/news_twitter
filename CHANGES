@@ -1,3 +1,9 @@
+2012-03-14  Takahiro Kambe  <tacahi>
+
+	* Add some text to README.md.
+
+	* Add note for Contao's version.
+
 2012-03-12  Takahiro Kambe  <tacahi>
 
 	* Guard OAuth.php and TwitterOAuth.php from direct access.
