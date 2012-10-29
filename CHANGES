@@ -1,3 +1,11 @@
+2012-10-30  Takahiro Kambe  <tacahi>
+
+	* Change Twitter's API to newer one.
+
+2012-10-16  Takahiro Kambe  <tacahi>
+
+	* Use URL for Twitter API 1.1.
+
 2012-03-14  Takahiro Kambe  <tacahi>
 
 	* Add some text to README.md.
