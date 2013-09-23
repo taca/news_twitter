@@ -98,10 +98,6 @@ class tl_news_archive_newstwitter extends Backend
 
 		if ($twitter_key == '' || $twitter_secret == '')
 		{
-			// Fall back to Twitter OAuth configuration for application "Contao Open Source CMS".
-            $twitter_key = 'WehyUu32jxf2mJmN9ijeDw';
-            $twitter_secret = 'hwnYKGAlySg5eXJGtJU9RoOHQLyArRa2KN4zO3oBQ';
-
 			$insecure = '<p class="tl_gerror">'.$GLOBALS['TL_LANG']['tl_news_archive']['twitter_auth_insecure'].'</p>';
 		}
 
