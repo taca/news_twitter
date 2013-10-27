@@ -221,7 +221,12 @@ class NewsTwitter extends Frontend
 
             if ($objPage->numRows)
             {
-                $strUrl = ampersand($this->generateFrontendUrl($objPage->row(), '/items/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && strlen($objArticle->alias)) ? $objArticle->alias : $objArticle->id)));
+                if ($GLOBALS['TL_CONFIG']['useAutoItem']) {
+                    $items = '';
+                } else {
+                    $items = '/items/';
+                }
+                $strUrl = ampersand($this->generateFrontendUrl($objPage->row(), $items . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && strlen($objArticle->alias)) ? $objArticle->alias : $objArticle->id)));
             }
             else
             {
