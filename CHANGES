@@ -1,3 +1,8 @@
+2013-10-25  Takahiro Kambe  <tacahi>
+
+	* Add '/items/' only unless $GLOBALS['TL_CONFIG']['useAutoItem'] is
+	  true.
+
 2013-07-10  Takahiro Kambe  <tacahi>
 
 	* Refelect real test with Twitter API 1.1.
