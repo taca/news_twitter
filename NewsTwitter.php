@@ -222,7 +222,7 @@ class NewsTwitter extends Frontend
             if ($objPage->numRows)
             {
                 if ($GLOBALS['TL_CONFIG']['useAutoItem']) {
-                    $items = '';
+                    $items = '/';
                 } else {
                     $items = '/items/';
                 }
