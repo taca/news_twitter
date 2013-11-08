@@ -1,3 +1,8 @@
+2013-11-09  Takahiro Kambe  <tacahi>
+
+	* Fix path to news item when $GLOBALS['TL_CONFIG']['useAutoItem'] is
+	  true.
+
 2013-10-25  Takahiro Kambe  <tacahi>
 
 	* Add '/items/' only unless $GLOBALS['TL_CONFIG']['useAutoItem'] is
